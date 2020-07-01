@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
+const path = require("path");
 
 const { createQuestion, getRandomNumber } = require("./helper_functions");
 
@@ -14,7 +15,7 @@ console.log(question);
 app.use(express.static("public"));
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
+  response.sendFile(path.join(__dirname, "/views/index.html"));
 });
 
 io.on("connection", (socket) => {
