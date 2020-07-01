@@ -1,0 +1,32 @@
+Arguments: 
+  /home/sudharsan/.nvm/versions/node/v13.9.0/bin/node /usr/local/bin/yarn add express
+
+PATH: 
+  /home/sudharsan/.nvm/versions/node/v13.9.0/bin:/opt/firefox/firefox:/home/sudharsan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  13.9.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:64:26)
+
+npm manifest: 
+  {
+    "name": "mathGame",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
