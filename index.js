@@ -17,7 +17,7 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname + "/views/index.html");
 });
 
-io.on("connection", function (socket) {
+io.on("connection", (socket) => {
   socket.on("user_joined", (name) => {
     const player = {
       id: socket.id,
@@ -45,10 +45,13 @@ io.on("connection", function (socket) {
       increasePoints(socket.id);
 
       updateGame();
+    } else {
+      decreasePoints(socket.id);
+      updateGame();
     }
   });
 
-  socket.on("disconnect", function () {
+  socket.on("disconnect", () => {
     // remove the player from the local array
     // players = [...players.filter((player) => player.id !== socket.id)];
 
@@ -56,7 +59,7 @@ io.on("connection", function (socket) {
   });
 });
 
-function increasePoints(id) {
+const increasePoints = (id) => {
   players = players.map((player) => {
     if (player.id === id) {
       return {
@@ -67,20 +70,30 @@ function increasePoints(id) {
       return player;
     }
   });
-}
+};
 
-function updateGame() {
+const decreasePoints = (id) => {
+  players = players.map((player) => {
+    if (player.id === id) {
+      return {
+        ...player,
+        points: 0,
+      };
+    } else {
+      return player;
+    }
+  });
+};
+
+const updateGame = () => {
   const leaderboard = players.sort((a, b) => b.points - a.points).slice(0, 10);
 
   io.emit("question", question.expression);
   io.emit("leaderboard", leaderboard);
-}
+};
 
-// USE THIS ON GLITCH
-// http.listen(process.env.PORT, () => {
-//   console.log("Your app is listening on port " + process.env.PORT);
-// });
+const PORT = process.env.PORT || 5000;
 
-http.listen(5000, () => {
-  console.log("Your app is listening on port " + 5000);
+http.listen(PORT, () => {
+  console.log(`Your app is listening on port ${PORT}`);
 });

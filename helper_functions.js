@@ -9,7 +9,7 @@ function createQuestion() {
 
   return {
     expression: expression,
-    answer: eval(expression),
+    answer: Math.floor(eval(expression)),
   };
 }
 
